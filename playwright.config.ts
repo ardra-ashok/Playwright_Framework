@@ -11,8 +11,10 @@ export default defineConfig({
   workers: 1,
   reporter: 'html',
   use: {
-    baseURL: process.env.BASE_URL|| 'https://practice.automationtesting.com',
+    baseURL: process.env.BASE_URL || 'https://practice.automationtesting.com',
+    headless: true,
     trace: 'on-first-retry',
+    userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36',
   },
   projects: [
     {name: 'chromium', use: { ...devices['Desktop Chrome'] },},
