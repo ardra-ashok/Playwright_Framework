@@ -9,22 +9,29 @@ jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
-    # THIS IS WHERE ENV VARS GO
-    env:
-      BASE_URL: https://practice.automationtesting.com
+    # This container has Chrome, Firefox, and Webkit PRE-INSTALLED
+    container:
+      image: mcr.microsoft.com/playwright:v1.49.1-noble 
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: lts/*
           cache: 'npm'
+
       - name: Install dependencies
         run: npm ci
-      - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
+
       - name: Run Playwright tests
         run: npx playwright test
-      - uses: actions/upload-artifact@v4
+        env:
+          BASE_URL: ${{ secrets.BASE_URL }}
+          CI: true
+
+      - name: Upload Report
+        uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:
           name: playwright-report
