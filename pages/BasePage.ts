@@ -1,10 +1,10 @@
 import { Page, Locator, expect } from '@playwright/test';
 
 export class BasePage {
-   readonly page: Page;
+  readonly page: Page;
 
    constructor(page: Page) {
-    this.page = page;
+     this.page = page;
    }
  
    async navigate(path: string) {
@@ -16,10 +16,17 @@ export class BasePage {
     await locator.click();
    }
 
-   async typeText(locator: Locator, text: string) {
-    await locator.waitFor({ state: 'visible' });
-    await locator.fill('');
-    await locator.fill(text);
+  async typeText(locator: Locator, text: string) {
+    try {
+      if (this.page.isClosed())
+        return; 
+      await locator.waitFor({ state: 'visible', timeout: 5000 })
+      await locator.clear()
+      await locator.fill(text)
+    } catch (error) {
+        console.error(`Failed to type into locator: ${error}`)
+        throw error;
+    }
    }
 
    async verifyPageUrl(expectedUrl: string | RegExp) {
@@ -29,4 +36,9 @@ export class BasePage {
    async takeScreenshot(name: string) {
     await this.page.screenshot({ path: `screenshots/${name}.png` });
    }
+  
+  async waitForPageReady(anchorLocator: Locator) {
+   await this.page.waitForLoadState('domcontentloaded');
+   await anchorLocator.waitFor({ state: 'visible', timeout: 10000 });
+  }
 }
