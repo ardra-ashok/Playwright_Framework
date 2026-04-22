@@ -7,13 +7,13 @@
      "display_name":"John Doe"
    },
    {
-     "type": "user",
+     "type": "user-1",
      "email": "customer2@practicesoftwaretesting.com",
      "password": "welcome01",
      "display_name":"Jack Howe"
    },
    {
-     "type": "user",
+     "type": "user-2",
      "email": "customer3@practicesoftwaretesting.com",
      "password": "pass123",
      "display_name":"Bob Smith"

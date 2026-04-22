@@ -5,7 +5,7 @@ import loginData from '../support/users.json';
 
 test.describe('Login - Successful with different users', () => {
 for (const user of loginData.validUsers) {
-  test(`should login successfully using ${user.email}`, async ({ page }) => {
+  test(`should login successfully using - ${user.type}`, async ({ page }) => {
       const loginPage = new LoginPage(page);
       const dashboardPage = new DashboardPage(page);
       await test.step('Navigate to Login Page and login', async () => {
