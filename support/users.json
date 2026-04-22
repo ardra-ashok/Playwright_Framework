@@ -1,0 +1,22 @@
+{
+ "validUsers": [
+   {
+     "type": "Standard Username",
+     "username": "user_alpha",
+     "password": "Password123!",
+     "displayName": "Alpha"
+   },
+   {
+     "type": "Email Address",
+     "username": "user_beta@finsecure.com",
+     "password": "Password123!",
+     "displayName": "Beta"
+   },
+   {
+     "type": "Account Number",
+     "username": "9988776655",
+     "password": "Password123!",
+     "displayName": "Gamma"
+   }
+ ]
+}
