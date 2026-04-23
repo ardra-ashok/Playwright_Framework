@@ -8,9 +8,9 @@
    },
    {
      "type": "user-1",
-     "email": "customer2@practicesoftwaretesting.com",
+     "email": "customer@practicesoftwaretesting.com",
      "password": "welcome01",
-     "display_name":"Jack Howe"
+     "display_name":"Jane Doe"
    },
    {
      "type": "user-2",

@@ -16,16 +16,16 @@ export class DashboardPage extends BasePage {
  }
  
  async verifyIsLoaded(name: string, type: string) {
-  await expect(this.accountName).toHaveText(name)
+  await expect(this.accountName, 'User should see the Account name on the dashboard').toHaveText(name)
   
   switch (true) {
    case type.includes('admin'):
-    await expect(this.page).toHaveURL(this.DASHBOARD_ADMIN);
-    await expect(this.dashboardMessage).toHaveText(/sales over the years/i)
+    await expect(this.page, 'User should be redirected to admin dashboard after login').toHaveURL(this.DASHBOARD_ADMIN);
+    await expect(this.dashboardMessage, 'User should see the dashboard message').toHaveText(/sales over the years/i)
     break;
    case type.includes('user'):
-    await expect(this.page).toHaveURL(this.DASHBOARD_USER);
-    await expect(this.dashboardMessage).toHaveText(/my account/i)
+    await expect(this.page,'User should be redirected to user dashboard after login').toHaveURL(this.DASHBOARD_USER);
+    await expect(this.dashboardMessage,'User should see the dashboard message').toHaveText(/my account/i)
     break;
    
   }

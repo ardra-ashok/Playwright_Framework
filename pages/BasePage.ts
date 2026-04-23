@@ -30,7 +30,7 @@ export class BasePage {
    }
 
    async verifyPageUrl(expectedUrl: string | RegExp) {
-     await expect(this.page).toHaveURL(expectedUrl);
+     await expect(this.page,'User should be navigated to login').toHaveURL(expectedUrl);
    }
 
    async takeScreenshot(name: string) {
