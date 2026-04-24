@@ -26,3 +26,10 @@ jobs:
 
       - name: Run tests
         run: npx playwright test
+
+      - name: Upload Playwright Trace
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: playwright-trace
+          path: test-results/**/trace.zip
