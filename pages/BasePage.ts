@@ -38,7 +38,7 @@ export class BasePage {
    }
   
   async waitForPageReady(anchorLocator: Locator) {
-   await this.page.waitForLoadState('domcontentloaded');
+   await this.page.waitForLoadState('networkidle');
    await anchorLocator.waitFor({ state: 'visible', timeout: 10000 });
   }
 }
