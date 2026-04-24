@@ -2,7 +2,9 @@ import { defineConfig, devices } from '@playwright/test';
 import dotenv from 'dotenv';
 import path from 'path';
 
-dotenv.config({ path: path.resolve(__dirname, 'utils','.env') });
+dotenv.config({
+  path: path.resolve(process.cwd(), 'utils/.env')
+});
 
 export default defineConfig({
   testDir: './tests',
@@ -11,7 +13,7 @@ export default defineConfig({
   workers: 1,
   reporter: 'html',
   use: {
-    baseURL: process.env.BASE_URL || 'https://practice.automationtesting.com',
+    baseURL: process.env.BASE_URL || 'https://practicesoftwaretesting.com',
     ignoreHTTPSErrors: true,
     headless: true,
     trace: 'on-first-retry',
