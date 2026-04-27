@@ -22,7 +22,7 @@ export const test = base.extend<MyFixtures>({
         await use(new DashboardPage(page));
     },
    authenticatedPage: async ({ page, request, baseURL, apiURL }, use) => {
-        const user = loginData.validUsers[1];
+        const user = loginData.validUsers[2];
         await loginViaAPI(request, page, user, baseURL!, apiURL);
         await use();
     },
