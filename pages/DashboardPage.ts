@@ -18,10 +18,7 @@ export class DashboardPage extends BasePage {
  }
  
   async verifyIsLoaded(name: string, type: string) {
-   const title = await this.page.title();
-    if (title.includes('security') || await this.page.locator('text=Performing security verification').isVisible()) {
-      await this.page.waitForNavigation({ waitUntil: 'networkidle' });
-    }
+  
 
   await expect(this.accountName, 'User should see the Account name on the dashboard').toHaveText(name)
   
