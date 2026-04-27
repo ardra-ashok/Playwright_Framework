@@ -2,9 +2,10 @@
 import { test } from '../utils/fixtures';
 import loginData from '../support/users.json';
 
-test.describe('Secure Area Tests', () => {
-    test.skip('should access dashboard immediately', async ({ authenticatedPage, dashboardPage }) => {
-     const user = loginData.validUsers[0]; 
-     await dashboardPage.verifyIsLoaded(user.display_name,user.type);
+test.describe('Test basic login through fixture', () => {
+    test('should access dashboard immediately', async ({  authenticatedPage, dashboardPage }) => {
+        const user = loginData.validUsers[1]; 
+        await dashboardPage.navigate()
+        await dashboardPage.verifyIsLoaded(user.display_name,user.type);
     });
 });

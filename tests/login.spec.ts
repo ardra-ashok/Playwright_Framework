@@ -22,13 +22,10 @@ for (const user of loginData.validUsers) {
         await dashboardPage.verifyIsLoaded(user.display_name, user.type);   
       });
   });
-  
 }
-
 
 test.only('logging in', async ({ page, request }) => {
     
-
   const loginResponse = await request.post(
     'https://api.practicesoftwaretesting.com/users/login',
     { data: loginPayload }
