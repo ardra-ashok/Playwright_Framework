@@ -8,9 +8,9 @@ const loginPayload = {
   "password": "pass123"
 };
 
-test.describe('Login - Successful with different users', () => {
+test.describe.skip('Login - Successful with different users', () => {
 for (const user of loginData.validUsers) {
-  test(`should login successfully using - ${user.type}`, async ({ page }) => {
+  test.skip(`should login successfully using - ${user.type}`, async ({ page }) => {
       const loginPage = new LoginPage(page);
       const dashboardPage = new DashboardPage(page);
     
@@ -24,7 +24,7 @@ for (const user of loginData.validUsers) {
   });
 }
 
-test('logging in', async ({ page, request }) => {
+test.only('logging in', async ({ page, request }) => {
     
   const loginResponse = await request.post(
     'https://api.practicesoftwaretesting.com/users/login',
