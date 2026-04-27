@@ -14,7 +14,7 @@ export default defineConfig({
     baseURL: process.env.UI_URL || 'https://practicesoftwaretesting.com', 
     ignoreHTTPSErrors: true,
     headless: true,
-    trace: 'on-first-retry',
+    trace: 'on',
     userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36',
   },
   projects: [
