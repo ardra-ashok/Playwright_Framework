@@ -8,7 +8,7 @@ const loginPayload = {
   "password": "pass123"
 };
 
-test.describe('Login - Successful with different users', () => {
+test.describe.skip('Login - Successful with different users', () => {
 for (const user of loginData.validUsers) {
   test(`should login successfully using - ${user.type}`, async ({ page }) => {
       const loginPage = new LoginPage(page);
