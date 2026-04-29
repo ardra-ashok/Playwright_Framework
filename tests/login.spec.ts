@@ -24,6 +24,7 @@ for (const user of loginData.validUsers) {
   });
 }
 
+  })
 test.only('logging in', async ({ page, request }) => {
     
   const loginResponse = await request.post(
@@ -45,4 +46,4 @@ test.only('logging in', async ({ page, request }) => {
 
 });
   
-})
+
