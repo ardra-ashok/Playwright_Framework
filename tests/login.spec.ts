@@ -4,7 +4,7 @@ import { DashboardPage } from '../pages/DashboardPage'
 import loginData from '../support/users.json';
 
 const loginPayload = {
-  "email": "customer3@practicesoftwaretesting.com",
+  "email": "customer2@practicesoftwaretesting.com",
   "password": "pass123"
 };
 
