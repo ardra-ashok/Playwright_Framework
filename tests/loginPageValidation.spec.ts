@@ -1,6 +1,5 @@
 
 import { test } from '../utils/fixtures';
-import { expect } from '@playwright/test'
 import { LoginPage } from '../pages/LoginPage';
 
 test.describe('Login - Field Level Negative Cases', () => {
@@ -67,7 +66,7 @@ test.describe('Login - Field Level Negative Cases', () => {
    await loginPage.login("admin@practicesoftwaretesting.com", "we");
   });
   await test.step('Verify login Error message', async () => {
-   await loginPage.verifyValidLoginError('Password length is invalid')
+  await loginPage.verifyValidLoginError('Password length is invalid')
   })
  });
 });

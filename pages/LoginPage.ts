@@ -34,12 +34,12 @@ export class LoginPage extends BasePage {
   }
 
   async verifyValidLoginError(...errors: string[]) {
-    for (const err of errors) {
-      if (err) {
-        await expect(this.page.getByText(err, { exact: true })).toBeVisible();
-      }
+  for (const err of errors) {
+      if (!err) continue;
+        const locator = this.page.locator('.alert.alert-danger', { hasText: err });
+
+      await expect(locator).toBeVisible();
     }
   }
 
- 
 }
