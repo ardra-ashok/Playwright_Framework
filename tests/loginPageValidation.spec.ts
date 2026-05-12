@@ -1,7 +1,6 @@
-import { LoginPage } from '../pages/LoginPage';
 import { test } from '../utils/fixtures';
 
-test.describe('Login - Field Level Negative Cases',{tag:['@qc01']}, () => {
+test.describe('Login - Field Level Negative Cases',{ tag:['@qc01'] }, () => {
 
  test('Empty email and password - TC01', async ({ loginPage }) => {
    await test.step('Navigate to Login Page and try to login', async () => {
@@ -64,7 +63,7 @@ test.describe('Login - Field Level Negative Cases',{tag:['@qc01']}, () => {
  });
 });
 
-test.describe('Login - Invalid Credentials',{tag:['@qc02']}, () => {
+test.describe('Login - Invalid Credentials',{ tag:['@qc02'] }, () => {
   test('Correct email + wrong password', async ({ loginPage }) => {
     await test.step('Navigate to Login Page and try to login', async () => {
       await loginPage.navigate();
@@ -86,7 +85,7 @@ test.describe('Login - Invalid Credentials',{tag:['@qc02']}, () => {
   });
 });
 
-test.describe('Login - Boundary Input Cases', { tag: ['@qc03'] }, () => {
+test.describe('Login - Boundary Input Cases',{ tag: ['@qc03'] }, () => {
   test('Extremely long email', async ({ loginPage }) => {
     const longEmail = 'a'.repeat(260) + '@example.com';
     await test.step('Navigate to Login Page and try to login', async () => {
@@ -110,5 +109,23 @@ test.describe('Login - Boundary Input Cases', { tag: ['@qc03'] }, () => {
 });
 
 
-
-
+test.describe('Login - Security Negative Cases',{ tag: ['@qc04'] } , () => {
+  test('SQL injection attempt in email', async ({ loginPage }) => {
+    await test.step('Navigate to Login Page and try to login', async () => {
+      await loginPage.navigate();
+      await loginPage.login(`' OR 1=1 --`, "welcome01");
+    });
+    await test.step('Verify login Error message', async () => {
+     await loginPage.verifyValidLoginError('Email format is invalid')
+    })
+  });
+  test('XSS attempt in email field', async ({ loginPage }) => {
+    await test.step('Navigate to Login Page and try to login', async () => {
+      await loginPage.navigate();
+      await loginPage.login('<script>alert(1)</script>', "welcome01");
+    });
+    await test.step('Verify login Error message', async () => {
+     await loginPage.verifyValidLoginError('Email format is invalid')
+    })
+});
+});
