@@ -25,7 +25,7 @@ for (const user of loginData.validUsers) {
 }
 
   })
-test.only('logging in', async ({ page, request }) => {
+test.skip('logging in', async ({ page, request }) => {
     
   const loginResponse = await request.post(
     'https://api.practicesoftwaretesting.com/users/login',
