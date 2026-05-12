@@ -5,7 +5,7 @@ import loginData from '../support/users.json';
 
 const loginPayload = {
   "email": "customer2@practicesoftwaretesting.com",
-  "password": "pass123"
+  "password": "welcome01"
 };
 
 test.describe.skip('Login - Successful with different users', () => {
