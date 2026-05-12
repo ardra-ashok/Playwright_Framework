@@ -1,11 +1,9 @@
-
-import { test } from '../utils/fixtures';
 import { LoginPage } from '../pages/LoginPage';
+import { test } from '../utils/fixtures';
 
-test.describe('Login - Field Level Negative Cases', () => {
+test.describe('Login - Field Level Negative Cases',{tag:['@qc01']}, () => {
 
- test('Empty email and password - TC01', async ({ page }) => {
-   const loginPage = new LoginPage(page);
+ test('Empty email and password - TC01', async ({ loginPage }) => {
    await test.step('Navigate to Login Page and try to login', async () => {
     await loginPage.navigate();
     await loginPage.login(" ", "");
@@ -15,8 +13,7 @@ test.describe('Login - Field Level Negative Cases', () => {
    })
  });
 
- test('Empty email and password - TC02', async ({ page }) => {
-   const loginPage = new LoginPage(page);
+ test('Empty email and password - TC02', async ({ loginPage }) => {
    await test.step('Navigate to Login Page and try to login', async () => {
     await loginPage.navigate();
     await loginPage.clickOnLogin()
@@ -26,8 +23,7 @@ test.describe('Login - Field Level Negative Cases', () => {
    })
  });
 
- test('Empty email only', async ({ page }) => {
-  const loginPage = new LoginPage(page);
+ test('Empty email only', async ({ loginPage }) => {
   await test.step('Navigate to Login Page and login', async () => {
    await loginPage.navigate();
    await loginPage.login("", "welcome01");
@@ -37,8 +33,7 @@ test.describe('Login - Field Level Negative Cases', () => {
   })
  });
  
- test('Empty password only', async ({ page }) => {
-  const loginPage = new LoginPage(page);
+ test('Empty password only', async ({ loginPage }) => {
   await test.step('Navigate to Login Page and try login', async () => {
    await loginPage.navigate();
    await loginPage.login("admin@practicesoftwaretesting.com","");
@@ -48,19 +43,17 @@ test.describe('Login - Field Level Negative Cases', () => {
   })
  });
 
- test('Invalid email format', async ({ page }) => {
-   const loginPage = new LoginPage(page);
+ test('Invalid email format', async ({ loginPage }) => {
    await test.step('Navigate to Login Page and try login', async () => {
     await loginPage.navigate();
-    await loginPage.login("invalid-email", "welcome01");
+    await loginPage.login("usergmail.com", "welcome01");
    });
   await test.step('Verify login Error message', async () => {
     await loginPage.verifyValidLoginError('Email format is invalid')
   })
  });
 
- test('Password too short', async ({ page }) => {
-  const loginPage = new LoginPage(page);
+ test('Password too short', async ({ loginPage }) => {
   await test.step('Navigate to Login Page and try login', async () => {
    await loginPage.navigate();
    await loginPage.login("admin@practicesoftwaretesting.com", "we");
@@ -70,3 +63,52 @@ test.describe('Login - Field Level Negative Cases', () => {
   })
  });
 });
+
+test.describe('Login - Invalid Credentials',{tag:['@qc02']}, () => {
+  test('Correct email + wrong password', async ({ loginPage }) => {
+    await test.step('Navigate to Login Page and try to login', async () => {
+      await loginPage.navigate();
+      await loginPage.login("admin@practicesoftwaretesting.com", "welcome0123");
+    });
+    await test.step('Verify login Error message', async () => {
+     await loginPage.verifyValidLoginError('Invalid email or password')
+    })
+  });
+
+  test('Wrong email + correct password', async ({ loginPage }) => {
+    await test.step('Navigate to Login Page and try to login', async () => {
+      await loginPage.navigate();
+      await loginPage.login("admin123@", "welcome01");
+    });
+    await test.step('Verify login Error message', async () => {
+     await loginPage.verifyValidLoginError('Email format is invalid')
+    })
+  });
+});
+
+test.describe('Login - Boundary Input Cases', { tag: ['@qc03'] }, () => {
+  test('Extremely long email', async ({ loginPage }) => {
+    const longEmail = 'a'.repeat(260) + '@example.com';
+    await test.step('Navigate to Login Page and try to login', async () => {
+      await loginPage.navigate();
+      await loginPage.login(longEmail, "welcome01");
+    });
+    await test.step('Verify login Error message', async () => {
+     await loginPage.verifyValidLoginError('Email format is invalid')
+    })
+  });
+
+  test('Emoji in password', async ({ loginPage }) => {
+    await test.step('Navigate to Login Page and try to login', async () => {
+      await loginPage.navigate();
+      await loginPage.login("customer1@practicesoftwaretesting.com", '😀😀😀');
+    });
+    await test.step('Verify login Error message', async () => {
+      await loginPage.verifyValidLoginError('Invalid email or password')
+    })
+  });
+});
+
+
+
+
